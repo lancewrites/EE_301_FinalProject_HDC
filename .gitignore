@@ -1,0 +1,75 @@
+# ----------------------------
+# Vivado / Xilinx / FPGA ignore
+# ----------------------------
+
+# Project-wide garbage Vivado regenerates
+*.jou
+*.log
+*.str
+*.rds
+*.rpx
+*.html
+*.xml
+*.zip
+*.gz
+*.tcl~
+*.backup
+*.cache
+*.csv
+*.tmp
+
+# Vivado-generated folders
+/.Xil/
+/.cache/
+/.hw/
+/.ip_user_files/
+/.sim/
+/.simulation/
+/.runs/
+/.webtalk/
+/.dcp_cache/
+/.xpr.cache/
+/usage_stats_webtalk.xml
+/webtalk.log
+
+# Vivado project files (optional to ignore)
+# Uncomment these if your team prefers "source-only repos"
+# *.xpr
+# *.xpf
+# *.xci
+# *.bd
+# *.xsa
+
+# Vivado Block Design products
+*.o
+*.so
+*.dll
+*.exe
+*.exe.stackdump
+
+# Autosaves
+*~
+*.bak
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python virtual environments
+venv/
+.env/
+
+# VS Code stuff
+.vscode/
+*.code-workspace
+
+# ----------------------------
+# FPGA SOURCE CONTROL RULE:
+# Only commit:
+# - HDL (vhd, vhdl, v)
+# - Testbenches
+# - Constraints (xdc)
+# - Scripts (tcl)
+# ----------------------------
