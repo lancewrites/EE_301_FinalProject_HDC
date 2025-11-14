@@ -39,29 +39,33 @@ begin
     process(clk, reset)
     begin
         if reset = '1' then
-            class_counter <= 0;--default to class 0
+            class_counter <= 25;--default to class 0
             bit_counter <= 0; --default to bit 0
-            testHV_counter <= 0; --default to TestHV 0
-            ClassHV <= (others => '0'); --default output to class 0
-            TestHV <= (others => '0'); --default output to TestHV 0
+            testHV_counter <= 125; --default to TestHV 0
+            ClassHV <= ("11001"); --default output to class 0  ***************************
+            TestHV <= ("1111101"); --default output to TestHV 0 ******************************
             bit_addr <= (others => '0'); --default output to bit 0
             Done <= '0'; -- Clear done signal
         elsif rising_edge(clk) then
             if enable = '1' then -- Only run when enabled
-                if bit_counter < 1023 then -- iterate through bits until 1023
+                if bit_counter < 1023 then -- iterate through bits until 1023 --MIGHT NEED TO CHANGE BECAUSE IT MIGHT NEED TO ACTUALLY HIT 1023
                     bit_counter <= bit_counter + 1; --increment bit counter
                     Done <= '0'; -- Clear done during iteration
                 else --when bit counter reaches 1023
                     bit_counter <= 0; --reset bit counter
-                    if class_counter < 25 then--and if class counter less than 25
-                        class_counter <= class_counter + 1; --increment class counter
+                    if class_counter > 0 then--and if class counter less than 25    ******************
+                        class_counter <= class_counter - 1; --increment class counter     **************************
                         Done <= '0'; -- Clear done, more classes to process
                     else -- when class counter reaches 25 and bit counter reaches 1023
-                        class_counter <= 0; -- wrap around to first class
+                        class_counter <= "11001"; -- wrap around to first class
                         Done <= '1'; -- signal that all classes and bits have been output
                         --and the current inference cycle is complete for the current test HV
                         -- Next test HV can be loaded externally or counter incremented here
+
+                        testHV_counter <= testHV_counter + 1;
+
                     end if;
+                    
                 end if;
             else
                 Done <= '0'; -- Clear done when not enabled
@@ -75,4 +79,5 @@ begin
         end if;
     end process;
 end Behavioral;
+
 
